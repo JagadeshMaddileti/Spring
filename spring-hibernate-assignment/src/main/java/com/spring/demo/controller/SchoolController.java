@@ -17,11 +17,17 @@ import java.util.List;
 @RequestMapping("/school")
 public class SchoolController {
 
-    @Autowired
-    private SchoolService schoolService;
+
+    private final SchoolService schoolService;
+    private final StudentService studentService;
 
     @Autowired
-    private StudentService studentService;
+    public SchoolController(SchoolService schoolService, StudentService studentService) {
+        this.schoolService = schoolService;
+        this.studentService = studentService;
+    }
+
+    private String schoolForm="school-form";
 
     @GetMapping("/list")
     public String listSchools(Model theModel){
@@ -34,13 +40,13 @@ public class SchoolController {
     public String showFormForAdd(Model theModel){
         School school=new School();
         theModel.addAttribute("school",school);
-        return "school-form";
+        return schoolForm;
     }
 
     @PostMapping("/saveSchool")
     public String saveContact(@Valid @ModelAttribute("school") School theSchool,BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
-            return "school-form";
+            return schoolForm;
         }
         schoolService.saveSchool(theSchool);
         return "redirect:/school/list";
@@ -50,10 +56,8 @@ public class SchoolController {
     public String showAllStudentsOfSchool(Model theModel,@PathVariable("schoolId") int id){
 
         School school=schoolService.getSchool(id);
-        System.out.println(school.getName());
         List<Student> students=school.getStudents();
 
-        System.out.println(students);
         theModel.addAttribute("students",students);
         return "list-student";
     }
@@ -64,7 +68,7 @@ public class SchoolController {
         School school=schoolService.getSchool(id);
         theModel.addAttribute("school",school);
 
-        return "school-form";
+        return schoolForm;
     }
 
     @GetMapping("/delete")
@@ -124,7 +128,6 @@ public class SchoolController {
         School school = schoolService.getSchool(schoolId);
         student.setSchool(school);
         studentService.saveStudent(student);
-        System.out.println("redirect:/school/" + schoolId + "/students");
         return "redirect:/school/" + schoolId + "/students";
     }
 
