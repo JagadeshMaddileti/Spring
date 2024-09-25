@@ -12,8 +12,7 @@
         <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <sonar.inclusions>./src/**</sonar.inclusions>
-        <sonar.exclusions>./pom.xml</sonar.exclusions>
+        <sonar.exclusions>**/entity/**, **/dao/**,**/testdb/**,**/webapp/**</sonar.exclusions>
   </properties>
   <name>spring-hibernate-assignment Maven Webapp</name>
   <url>http://maven.apache.org</url>
