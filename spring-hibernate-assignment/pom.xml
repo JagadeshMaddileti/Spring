@@ -184,7 +184,7 @@
     </plugins>
   </build>
 
-     <profiles>
+  <profiles>
     <profile>
       <id>coverage</id>
       <activation>
@@ -214,6 +214,5 @@
         </plugins>
       </build>
     </profile>
-  </profiles>
   </profiles>
 </project>
