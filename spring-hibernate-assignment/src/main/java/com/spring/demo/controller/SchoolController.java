@@ -28,6 +28,7 @@ public class SchoolController {
     }
 
     private String schoolForm="school-form";
+    private String studentForm="student-form";
 
     @GetMapping("/list")
     public String listSchools(Model theModel){
@@ -83,7 +84,7 @@ public class SchoolController {
         Student student = new Student();
         theModel.addAttribute("student", student);
         theModel.addAttribute("schoolId", schoolId); // Pass schoolId to the form
-        return "student-form"; // Return the form view
+        return studentForm; // Return the form view
     }
 
     @GetMapping("/{schoolId}/students/list")
@@ -97,13 +98,13 @@ public class SchoolController {
     public String showAddSchoolStudentForm(@PathVariable int schoolId, Model model) {
         Student student = new Student();
         model.addAttribute("student", student);
-        return "student-form";
+        return studentForm;
     }
 
     @PostMapping("/{schoolId}/add-student")
     public String addStudent(@PathVariable int schoolId,@Valid @ModelAttribute("student") Student student,BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "student-form";
+            return studentForm;
         }
         School school = schoolService.getSchool(schoolId);
         student.setSchool(school);
@@ -116,13 +117,13 @@ public class SchoolController {
         Student student = studentService.getStudent(studentId);
         model.addAttribute("student",student);
         model.addAttribute("schoolId", schoolId);
-        return "student-form";
+        return studentForm;
     }
 
     @PostMapping("/{schoolId}/update-student/{studentId}")
     public String updateStudent(@PathVariable int schoolId, @PathVariable int studentId,@Valid @ModelAttribute("student") Student student,BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "student-form";
+            return studentForm;
         }
         student.setId(studentId);
         School school = schoolService.getSchool(schoolId);
