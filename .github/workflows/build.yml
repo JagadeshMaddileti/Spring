@@ -2,7 +2,7 @@ name: SonarCloud
 on:
   push:
     branches:
-      - spring-hibernate
+      - master
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
