@@ -13,6 +13,7 @@
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.projectKey>JagadeshMaddileti_Spring</sonar.projectKey>
         <sonar.exclusions>**/entity/**, **/dao/**,**/testdb/**,**/webapp/**</sonar.exclusions>
+        <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
   </properties>
   <name>spring-hibernate-assignment Maven Webapp</name>
   <url>http://maven.apache.org</url>
