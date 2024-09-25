@@ -20,6 +20,8 @@ public class SchoolController {
 
     private final SchoolService schoolService;
     private final StudentService studentService;
+    private static final String SCHOOL_ATTRIBUTE = "school";
+    private static final String STUDENT_ATTRIBUTE = "student";
 
     @Autowired
     public SchoolController(SchoolService schoolService, StudentService studentService) {
@@ -40,7 +42,7 @@ public class SchoolController {
     @GetMapping("/showFormForAdd")
     public String showFormForAdd(Model theModel){
         School school=new School();
-        theModel.addAttribute("school",school);
+        theModel.addAttribute(SCHOOL_ATTRIBUTE,school);
         return schoolForm;
     }
 
@@ -67,7 +69,7 @@ public class SchoolController {
     public String showFormForUpdate(Model theModel,@RequestParam("schoolId") int id){
 
         School school=schoolService.getSchool(id);
-        theModel.addAttribute("school",school);
+        theModel.addAttribute(SCHOOL_ATTRIBUTE,school);
 
         return schoolForm;
     }
@@ -82,7 +84,7 @@ public class SchoolController {
     public String showFormForAddStudent(@PathVariable("schoolId") int schoolId, Model theModel) {
         // Create a new Student object or perform other logic
         Student student = new Student();
-        theModel.addAttribute("student", student);
+        theModel.addAttribute(STUDENT_ATTRIBUTE, student);
         theModel.addAttribute("schoolId", schoolId); // Pass schoolId to the form
         return studentForm; // Return the form view
     }
@@ -90,14 +92,14 @@ public class SchoolController {
     @GetMapping("/{schoolId}/students/list")
     public String studentsList(@PathVariable int schoolId, Model model) {
         School school = schoolService.getSchool(schoolId);
-        model.addAttribute("school", school);
+        model.addAttribute(SCHOOL_ATTRIBUTE, school);
         return "list-student";
     }
 
     @GetMapping("/{schoolId}/add-student")
     public String showAddSchoolStudentForm(@PathVariable int schoolId, Model model) {
         Student student = new Student();
-        model.addAttribute("student", student);
+        model.addAttribute(STUDENT_ATTRIBUTE, student);
         return studentForm;
     }
 
@@ -115,7 +117,7 @@ public class SchoolController {
     @GetMapping("/{schoolId}/update-student/{studentId}")
     public String showUpdateStudentForm(@PathVariable int schoolId, @PathVariable int studentId, Model model) {
         Student student = studentService.getStudent(studentId);
-        model.addAttribute("student",student);
+        model.addAttribute(STUDENT_ATTRIBUTE,student);
         model.addAttribute("schoolId", schoolId);
         return studentForm;
     }
