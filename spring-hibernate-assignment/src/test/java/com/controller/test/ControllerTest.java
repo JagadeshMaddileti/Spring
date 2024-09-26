@@ -81,7 +81,6 @@ class ControllerTest {
 =======
         verify(model, times(1)).addAttribute("schoolId", schoolId);
 >>>>>>> Stashed changes
-
         assertEquals("student-form", viewName);
     }
 
