@@ -12,13 +12,8 @@ import java.util.List;
 @Service
 public class SchoolServiceImp implements SchoolService{
 
-    private final SchoolDAO schoolDAO;
-
     @Autowired
-    public SchoolServiceImp(SchoolDAO schoolDAO) {
-        this.schoolDAO = schoolDAO;
-    }
-
+    private SchoolDAO schoolDAO;
 
     @Override
     @Transactional
