@@ -62,7 +62,7 @@ class ControllerTest {
         String viewName = schoolController.showFormForAdd(model);
 
         ArgumentCaptor<School> schoolCaptor = ArgumentCaptor.forClass(School.class);
-        verify(model, times(1)).addAttribute("school", schoolCaptor.capture());
+        verify(model, times(1)).addAttribute(eq("school"), schoolCaptor.capture());
 
         assertNotNull(schoolCaptor.getValue());
         assertEquals("school-form", viewName);
@@ -71,12 +71,12 @@ class ControllerTest {
     @Test
     void testShowFormForAddStudent() {
         int schoolId = 1;
-        Model mockModel = mock(Model.class);
+        Model model = mock(Model.class);
 
         String viewName = schoolController.showFormForAddStudent(schoolId, model);
 
-        verify(model, times(1)).addAttribute("student", any(Student.class));
-        verify(model, times(1)).addAttribute("schoolId", schoolId);
+        verify(model, times(1)).addAttribute(eq("student"), any(Student.class));
+        verify(model, times(1)).addAttribute(eq("schoolId"), eq(schoolId));
 
         assertEquals("student-form", viewName);
     }
@@ -91,8 +91,8 @@ class ControllerTest {
         String viewName = schoolController.showUpdateStudentForm(schoolId, studentId, model);
 
         verify(studentService, times(1)).getStudent(studentId);
-        verify(model, times(1)).addAttribute("student", any(Student.class));
-        verify(model, times(1)).addAttribute("schoolId", schoolId);
+        verify(model, times(1)).addAttribute(eq("student"), any(Student.class));
+        verify(model, times(1)).addAttribute(eq("schoolId"), eq(schoolId));
 
         assertEquals("student-form", viewName);
     }
@@ -107,7 +107,7 @@ class ControllerTest {
         String viewName = schoolController.studentsList(schoolId, model);
 
         verify(schoolService, times(1)).getSchool(schoolId);
-        verify(model, times(1)).addAttribute("school", mockSchool);
+        verify(model, times(1)).addAttribute(eq("school"), eq(mockSchool));
 
         assertEquals("list-student", viewName);
     }
@@ -129,7 +129,7 @@ class ControllerTest {
         String viewName = schoolController.showAddSchoolStudentForm(schoolId, model);
 
         ArgumentCaptor<Student> studentCaptor = ArgumentCaptor.forClass(Student.class);
-        verify(model, times(1)).addAttribute("student", studentCaptor.capture());
+        verify(model, times(1)).addAttribute(eq("student"), studentCaptor.capture());
 
         assertNotNull(studentCaptor.getValue());
         assertEquals("student-form", viewName);
@@ -145,7 +145,7 @@ class ControllerTest {
         String viewName = schoolController.showAllStudentsOfSchool(model, schoolId);
 
         verify(schoolService, times(1)).getSchool(schoolId);
-        verify(model, times(1)).addAttribute("students", mockStudents);
+        verify(model, times(1)).addAttribute(eq("students"), eq(mockStudents));
 
         assertEquals("list-student", viewName);
     }
@@ -158,7 +158,7 @@ class ControllerTest {
         String viewName = schoolController.showFormForUpdate(model, schoolId);
 
         verify(schoolService, times(1)).getSchool(schoolId);
-        verify(model, times(1)).addAttribute("school", mockSchool);
+        verify(model, times(1)).addAttribute(eq("school"), eq(mockSchool));
 
         assertEquals("school-form", viewName);
     }
