@@ -76,7 +76,11 @@ class ControllerTest {
         String viewName = schoolController.showFormForAddStudent(schoolId, model);
 
         verify(model, times(1)).addAttribute(eq("student"), any(Student.class));
+<<<<<<< Updated upstream
         verify(model, times(1)).addAttribute(eq("schoolId"), eq(schoolId));
+=======
+        verify(model, times(1)).addAttribute("schoolId", schoolId);
+>>>>>>> Stashed changes
 
         assertEquals("student-form", viewName);
     }
@@ -92,7 +96,11 @@ class ControllerTest {
 
         verify(studentService, times(1)).getStudent(studentId);
         verify(model, times(1)).addAttribute(eq("student"), any(Student.class));
+<<<<<<< Updated upstream
         verify(model, times(1)).addAttribute(eq("schoolId"), eq(schoolId));
+=======
+        verify(model, times(1)).addAttribute("schoolId", schoolId);
+>>>>>>> Stashed changes
 
         assertEquals("student-form", viewName);
     }
