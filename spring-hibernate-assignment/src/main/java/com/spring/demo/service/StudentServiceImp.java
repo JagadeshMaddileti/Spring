@@ -1,7 +1,6 @@
 package com.spring.demo.service;
 
 import com.spring.demo.dao.StudentDAO;
-import com.spring.demo.dao.StudentDAOImp;
 import com.spring.demo.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,8 +11,12 @@ import java.util.List;
 @Service
 public class StudentServiceImp implements StudentService{
 
+    private final StudentDAO studentDAO;
+
     @Autowired
-    private StudentDAO studentDAO;
+    public StudentServiceImp(StudentDAO studentDAO) {
+        this.studentDAO = studentDAO;
+    }
 
     @Override
     @Transactional

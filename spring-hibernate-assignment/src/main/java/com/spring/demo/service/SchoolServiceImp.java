@@ -2,7 +2,6 @@ package com.spring.demo.service;
 
 import com.spring.demo.dao.SchoolDAO;
 import com.spring.demo.entity.School;
-import com.spring.demo.entity.Student;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,8 +12,13 @@ import java.util.List;
 @Service
 public class SchoolServiceImp implements SchoolService{
 
+    private final SchoolDAO schoolDAO;
+
     @Autowired
-    private SchoolDAO schoolDAO;
+    public SchoolServiceImp(SchoolDAO schoolDAO) {
+        this.schoolDAO = schoolDAO;
+    }
+
 
     @Override
     @Transactional

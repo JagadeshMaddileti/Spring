@@ -1,7 +1,6 @@
 package com.spring.demo.service;
 
 import com.spring.demo.entity.School;
-import com.spring.demo.entity.Student;
 
 import java.util.List;
 
